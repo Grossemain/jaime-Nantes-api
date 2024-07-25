@@ -23,6 +23,6 @@ class Category extends Model
 
     public function termCategory()
     {
-        return $this->belongsTo(TermCategory::class, 'term_category_id');
+        return $this->belongsTo(TermCategory::class, 'id');
     }
 }

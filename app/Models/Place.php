@@ -23,7 +23,7 @@ class Place extends Model
         'price',
         'slug',
         'web_site',
-        'id',
+        'user_id',
     ];
 
     public function user()

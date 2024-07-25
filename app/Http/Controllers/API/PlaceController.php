@@ -13,7 +13,8 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
+        $places = Place::all();
+        return response()->json($places);
     }
 
     /**
@@ -21,7 +22,23 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:150',
+            'description' => 'required',
+            'images' => 'required',
+            'adresse' => 'required',
+            'hours' => 'required|max:100',
+            'price' => 'required|max:100',
+            'slug' => 'required|max:50',
+            'web_site' => 'required|max:50',
+            'user_id' => 'required',
+        ]);
+
+        $place = Place::create($request->all());
+        return response()->json([
+            'status' => 'Success',
+            'data' => $place,
+        ]);
     }
 
     /**
@@ -29,7 +46,7 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        //
+        return response()->json($place);
     }
 
     /**
@@ -37,7 +54,23 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:150',
+            'description' => 'required',
+            'images' => 'required',
+            'adresse' => 'required',
+            'hours' => 'required|max:100',
+            'price' => 'required|max:100',
+            'slug' => 'required|max:50',
+            'web_site' => 'required|max:50',
+            'user_id' => 'required',
+        ]);
+
+        $place->update($request->all());
+        return response()->json([
+            'status' => 'Mise à jour avec succès'
+        ]);
+
     }
 
     /**
@@ -45,6 +78,8 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
-        //
+        return response()->json([
+            'status' => 'Supprimer avec succès'
+        ]);
     }
 }

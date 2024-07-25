@@ -13,7 +13,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        return response()->json($articles);
     }
 
     /**
@@ -21,7 +22,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:100',
+            'h1_title' => 'required|max:100',
+            'content' => 'required',
+            'img' => 'required',
+            'slug' => 'required|max:50',
+        ]);
+        $article = Article::create($request->all());
+        return response()->json([
+            'status' => 'Success',
+            'data' => $article,
+        ]);
     }
 
     /**
@@ -29,7 +41,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return response()->json($article);
     }
 
     /**
@@ -37,7 +49,18 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:100',
+            'h1_title' => 'required|max:100',
+            'content' => 'required',
+            'img' => 'required',
+            'slug' => 'required|max:50',
+        ]);
+        $article->update($request->all());
+        return response()->json([
+            'status' => 'Mise à jour avec succès'
+        ]);
+
     }
 
     /**
@@ -45,6 +68,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        return response()->json([
+            'status' => 'Supprimer avec succès'
+        ]);
     }
 }

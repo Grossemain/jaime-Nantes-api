@@ -16,12 +16,12 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|min:2|max:255',
+            'user_name' => 'required|string|min:2|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|max:255',
         ]);
         $user = $this->user::create([
-            'name' => $request['name'],
+            'user_name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
         ]);

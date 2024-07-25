@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return response()->json($categories);
     }
 
     /**
@@ -21,7 +22,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_name' => 'required|max:150',
+            'category_description' => 'required',
+            'category_slug' => 'required|max:150',
+            'term_category_id' => 'required',
+
+        ]);
+        $category = Category::create($request->all());
+        return response()->json([
+            'status' => 'Success',
+            'data' => $category,
+        ]);
     }
 
     /**
@@ -29,7 +41,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return response()->json($category);
     }
 
     /**
@@ -37,7 +49,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'category_name' => 'required|max:150',
+            'category_description' => 'required',
+            'category_slug' => 'required|max:150',
+            'term_category_id' => 'required',
+
+        ]);
+
+        $category->update($request->all());
+        return response()->json([
+            'status' => 'Mise à jour avec succès'
+        ]);
+
     }
 
     /**
@@ -45,6 +69,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        return response()->json([
+            'status' => 'Supprimer avec succès'
+        ]);
     }
 }
