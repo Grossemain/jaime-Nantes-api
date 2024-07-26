@@ -17,7 +17,7 @@ class Place extends Model
         'id',
         'name',
         'description',
-        'images',
+        'image',
         'adresse',
         'hours',
         'price',

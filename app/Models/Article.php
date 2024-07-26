@@ -18,7 +18,7 @@ class Article extends Model
         'title',
         'h1_title',
         'content',
-        'img',
+        'image',
         'slug',
     ];
 

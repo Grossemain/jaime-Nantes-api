@@ -67,6 +67,7 @@ class TermCategoryController extends Controller
      */
     public function destroy(TermCategory $termCategory)
     {
+        $termCategory->delete();
         return response()->json([
             'status' => 'Supprimer avec succès'
         ]);

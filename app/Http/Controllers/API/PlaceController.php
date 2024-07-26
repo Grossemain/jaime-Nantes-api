@@ -25,7 +25,7 @@ class PlaceController extends Controller
         $request->validate([
             'name' => 'required|max:150',
             'description' => 'required',
-            'images' => 'required',
+            'image' => 'required',
             'adresse' => 'required',
             'hours' => 'required|max:100',
             'price' => 'required|max:100',
@@ -57,7 +57,7 @@ class PlaceController extends Controller
         $request->validate([
             'name' => 'required|max:150',
             'description' => 'required',
-            'images' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'adresse' => 'required',
             'hours' => 'required|max:100',
             'price' => 'required|max:100',
@@ -65,6 +65,21 @@ class PlaceController extends Controller
             'web_site' => 'required|max:50',
             'user_id' => 'required',
         ]);
+
+        $filename = "";
+        if ($request->hasFile('image')) {
+        // On récupère le nom du fichier avec son extension, résultat $filenameWithExt : "jeanmiche.jpg"
+        $filenameWithExt = $request->file('image')->getClientOriginalName();
+        $filenameWithExt = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        // On récupère l'extension du fichier, résultat $extension : ".jpg"
+        $extension = $request->file('image')->getClientOriginalExtension();
+        // On créer un nouveau fichier avec le nom + une date + l'extension, résultat $filename :"jeanmiche_20220422.jpg"
+        $filename = $filenameWithExt. '_' .time().'.'.$extension;
+        // On enregistre le fichier à la racine /storage/app/public/uploads, ici la méthode storeAs défini déjà le chemin/storage/app
+        $request->file('image')->storeAs('public/uploads', $filename);
+        } else {
+        $filename = Null;
+        }
 
         $place->update($request->all());
         return response()->json([
@@ -78,6 +93,7 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
+        $place->delete();
         return response()->json([
             'status' => 'Supprimer avec succès'
         ]);

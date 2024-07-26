@@ -26,9 +26,25 @@ class ArticleController extends Controller
             'title' => 'required|max:100',
             'h1_title' => 'required|max:100',
             'content' => 'required',
-            'img' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'slug' => 'required|max:50',
         ]);
+
+        $filename = "";
+        if ($request->hasFile('image')) {
+            // On récupère le nom du fichier avec son extension, résultat $filenameWithExt : "jeanmiche.jpg"
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filenameWithExt = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // On récupère l'extension du fichier, résultat $extension : ".jpg"
+            $extension = $request->file('image')->getClientOriginalExtension();
+            // On créer un nouveau fichier avec le nom + une date + l'extension, résultat $filename :"jeanmiche_20220422.jpg"
+            $filename = $filenameWithExt . '_' . time() . '.' . $extension;
+            // On enregistre le fichier à la racine /storage/app/public/uploads, ici la méthode storeAs défini déjà le chemin/storage/app
+            $request->file('image')->storeAs('public/uploads', $filename);
+        } else {
+            $filename = Null;
+        }
+
         $article = Article::create($request->all());
         return response()->json([
             'status' => 'Success',
@@ -53,14 +69,13 @@ class ArticleController extends Controller
             'title' => 'required|max:100',
             'h1_title' => 'required|max:100',
             'content' => 'required',
-            'img' => 'required',
+            'image' => 'required',
             'slug' => 'required|max:50',
         ]);
         $article->update($request->all());
         return response()->json([
             'status' => 'Mise à jour avec succès'
         ]);
-
     }
 
     /**
@@ -68,6 +83,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        $article->delete();
         return response()->json([
             'status' => 'Supprimer avec succès'
         ]);
