@@ -10,6 +10,10 @@ use App\Http\Controllers\API\PlaceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+    });
+
 // Accessible à tous
 
 // Route::post('/register', [AuthController::class, 'register']);
@@ -19,6 +23,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function() {
 Route::get('/currentuser', [UserController::class, 'currentUser']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/users', [AuthController::class, 'index'])->name('users.index');
+Route::get('/users{user}', [AuthController::class, 'show'])->name('users.show');
 });
 
 //Routes vers Term Category

@@ -18,6 +18,10 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->string('image')->nullable();
             $table->string('slug',50);
+            $table->string('term_category_id', 50);
+            
+            $table->foreign('term_category_id')->references('term_category_id')->on('term_categories');
+
             $table->timestamps();
         });
     }

@@ -32,6 +32,7 @@ class TermCategoryController extends Controller
 
         ]);
         $termCategory = TermCategory::create($request->all());
+
         return response()->json([
             'status' => 'Success',
             'data' => $termCategory,

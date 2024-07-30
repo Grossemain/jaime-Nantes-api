@@ -20,9 +20,11 @@ return new class extends Migration
             $table->string('hours',100)->nullable();
             $table->string('price',100)->nullable();
             $table->string('slug',50);
-            $table->string('web_site',50)->nullable();
+            $table->string('web_site')->nullable();
+            $table->string('term_category_id', 50);
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreign('term_category_id')->references('term_category_id')->on('term_categories');
 
             $table->timestamps();
 

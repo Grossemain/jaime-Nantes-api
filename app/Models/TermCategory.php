@@ -26,11 +26,11 @@ class TermCategory extends Model
 
     public function articles()
     {
-        return $this->belongsToMany(Article::class, 'articles_term_categories', 'term_category_id', 'article_id');
+        return $this->hasMany(Article::class, 'term_category_id', 'term_category_id');
     }
 
     public function places()
     {
-        return $this->belongsToMany(Place::class, 'places_term_categories', 'term_category_id', 'place_id');
+        return $this->hasMany(Place::class, 'term_category_id', 'term_category_id');
     }
 }

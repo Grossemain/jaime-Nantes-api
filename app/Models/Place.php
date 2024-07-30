@@ -24,6 +24,7 @@ class Place extends Model
         'slug',
         'web_site',
         'user_id',
+        'term_category_id',
     ];
 
     public function user()
@@ -33,6 +34,6 @@ class Place extends Model
 
     public function termCategories()
     {
-        return $this->belongsToMany(TermCategory::class, 'places_term_categories', 'place_id', 'term_category_id');
+        return $this->belongsTo(TermCategory::class, 'term_category_id', 'term_category_id');
     }
 }
