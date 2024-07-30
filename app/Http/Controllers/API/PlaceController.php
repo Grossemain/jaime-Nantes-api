@@ -32,7 +32,7 @@ class PlaceController extends Controller
             'slug' => 'required|max:50',
             'web_site' => 'required',
             'user_id' => 'required',
-            'term_category_id'=>'required|max:50'
+            'category_id'=>'required|max:50'
         ]);
 
         $filename = "";
@@ -80,7 +80,7 @@ class PlaceController extends Controller
             'slug' => 'required|max:50',
             'web_site' => 'required',
             'user_id' => 'required',
-            'term_category_id'=>'required|max:50'
+            'category_id'=>'required|max:50'
         ]);
         $place->update($request->all());
         return response()->json([

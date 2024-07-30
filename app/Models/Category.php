@@ -25,4 +25,14 @@ class Category extends Model
     {
         return $this->belongsTo(TermCategory::class, 'id');
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'category_id');
+    }
+
+    public function places()
+    {
+        return $this->hasMany(Place::class, 'category_id');
+    }
 }

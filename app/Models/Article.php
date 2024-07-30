@@ -20,11 +20,11 @@ class Article extends Model
         'content',
         'image',
         'slug',
-        'term_category_id',
+        'category_id',
     ];
 
-    public function termCategories()
+    public function category()
     {
-        return $this->belongsTo(TermCategory::class, 'term_category_id', 'term_category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

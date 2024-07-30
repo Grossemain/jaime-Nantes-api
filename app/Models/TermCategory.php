@@ -24,13 +24,4 @@ class TermCategory extends Model
         return $this->hasMany(Category::class, 'term_category_id', 'term_category_id');
     }
 
-    public function articles()
-    {
-        return $this->hasMany(Article::class, 'term_category_id', 'term_category_id');
-    }
-
-    public function places()
-    {
-        return $this->hasMany(Place::class, 'term_category_id', 'term_category_id');
-    }
 }

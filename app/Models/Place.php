@@ -24,7 +24,7 @@ class Place extends Model
         'slug',
         'web_site',
         'user_id',
-        'term_category_id',
+        'category_id',
     ];
 
     public function user()
@@ -32,8 +32,8 @@ class Place extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function termCategories()
+    public function category()
     {
-        return $this->belongsTo(TermCategory::class, 'term_category_id', 'term_category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }
