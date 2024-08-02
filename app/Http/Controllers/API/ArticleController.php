@@ -28,7 +28,7 @@ class ArticleController extends Controller
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'slug' => 'required|max:50',
-            'category_id'=>'required|max:50'
+            'category_id'=>'nullable|max:50'
         ]);
 
         $filename = "";

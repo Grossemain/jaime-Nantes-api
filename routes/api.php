@@ -51,6 +51,7 @@ Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('a
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
+
 //Routes vers Places
 
 Route::get('/places', [PlaceController::class, 'index'])->name('places.index');

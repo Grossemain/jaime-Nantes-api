@@ -30,7 +30,7 @@ class PlaceController extends Controller
             'hours' => 'required|max:100',
             'price' => 'required|max:100',
             'slug' => 'required|max:50',
-            'web_site' => 'required',
+            // 'web_site' => 'required',
             'user_id' => 'required',
             'category_id'=>'required|max:50'
         ]);
@@ -49,8 +49,8 @@ class PlaceController extends Controller
         } else {
             $filename = Null;
         }
+        $place = Place::create(array_merge($request->all(), ['image' => $filename]));
 
-        $place = Place::create($request->all());
         return response()->json([
             'status' => 'Success',
             'data' => $place,
